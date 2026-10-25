@@ -6,13 +6,17 @@ import { url } from "../../lib/site";
 <section class="section" id="install">
   <div class="shell quickstart">
     <div class="quickstart__head">
-      <p class="mono-label">QUICK START</p>
       <h2 class="display-lg">A steward<br />in one command.</h2>
       <p class="body-copy">
-        Run it on your machine, point it at a provider, and open the WebUI.
-        There is no external database, queue or account service to stand up
-        first.
+        Install it on your machine, add one provider key, and open the WebUI.
+        There is no database, queue or account service to stand up first —
+        SQLite is embedded, and the whole court runs in one process.
       </p>
+      <p class="body-copy">
+        You bring the machine and the model key. There is no hosted plan, no seat
+        count, and no bill from us.
+      </p>
+      <span class="mono-label">A few minutes, start to first reply</span>
       <a class="mono" style="font-size:11px;color:var(--vz-live-text)" href={url("/docs/getting-started/installation/")}>
         Full installation guide →
       </a>

@@ -19,12 +19,11 @@ const latestSlug = latest?.id.replace(/\.md$/, "");
   <div class="shell">
     <div class="teasers">
       <article class="teaser">
-        <p class="mono-label">DOCUMENTATION</p>
         <h3>From first run to a working court.</h3>
         <p>
           Installation, providers, channels, agents, memory, skills, MCP,
-          observability and the API. The docs are built from the same source as
-          the binary.
+          observability and the API. Every page is versioned with the binary, so
+          the docs cannot describe a release you do not have.
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
           <span class="chip">quick start</span>
@@ -35,7 +34,6 @@ const latestSlug = latest?.id.replace(/\.md$/, "");
       </article>
 
       <article class="teaser">
-        <p class="mono-label">FROM THE COURT</p>
         {latest ? (
           <>
             <h3>

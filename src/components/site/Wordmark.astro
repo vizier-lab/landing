@@ -1,0 +1,74 @@
+---
+/*
+ * The brand wordmark, kept as a plain Astro component rather than the design
+ * library's React `Wordmark`: Starlight's CSS entry loads the design tokens but
+ * not Tailwind, so the library's utility classes would not be generated on the
+ * docs pages. The geometry and type match `design/src/brand/Wordmark`.
+ */
+type Props = {
+  /** Live turns the second i-dot emerald. One live signal per lockup. */
+  state?: "idle" | "live";
+  /** Font size in px; the drawn wordmark is 100. */
+  size?: number;
+  class?: string;
+};
+
+const { state = "idle", size = 32, class: className } = Astro.props;
+---
+
+<span
+  class:list={["wordmark", className]}
+  role="img"
+  aria-label="vizier"
+  style={`font-size: ${size}px`}
+>
+  <span class="wordmark__text" aria-hidden="true">
+    v<span class="wordmark__i">ı<span class="wordmark__dot"></span></span>z<span class="wordmark__i">ı<span
+        class:list={["wordmark__dot", { "wordmark__dot--live": state === "live" }]}
+      ></span></span>er
+  </span>
+</span>
+
+<style>
+  /* The "star-dot" wordmark (B2): lowercase vizier in Schibsted Grotesk Bold
+     with round i-dots. A dotless i carries the drawn dot so it stays round at
+     every size; the second one turns emerald when live. */
+  .wordmark {
+    display: inline-flex;
+    color: var(--vz-ink);
+    font-family: var(
+      --font-sans,
+      "Schibsted Grotesk Variable",
+      ui-sans-serif,
+      system-ui,
+      sans-serif
+    );
+    font-weight: 700;
+    line-height: 1.23;
+    user-select: none;
+  }
+
+  .wordmark__text {
+    display: contents;
+  }
+
+  .wordmark__i {
+    position: relative;
+    display: inline-block;
+  }
+
+  .wordmark__dot {
+    position: absolute;
+    top: 0.254em;
+    left: 50%;
+    width: 0.155em;
+    height: 0.155em;
+    transform: translateX(-50%);
+    border-radius: 9999px;
+    background: var(--vz-ink);
+  }
+
+  .wordmark__dot--live {
+    background: var(--vz-live);
+  }
+</style>

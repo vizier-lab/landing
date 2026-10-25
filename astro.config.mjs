@@ -22,11 +22,10 @@ export default defineConfig({
     starlight({
       title: "Vizier",
       description: "A digital steward for Your Majesty.",
-      logo: {
-        src: "./src/assets/mark.svg",
-        alt: "Vizier",
-      },
       favicon: "/favicon.svg",
+      components: {
+        SiteTitle: "./src/components/site/DocsSiteTitle.astro",
+      },
       social: [
         {
           icon: "github",
@@ -70,6 +69,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       dedupe: ["react", "react-dom", "motion"],
+    },
+    // The design package is linked from the vizier checkout and resolves its
+    // own React through lucide-react. Bundle both so `dedupe` above applies in
+    // dev as well: an externalised copy renders the server shell with one React
+    // and hydrates with another, which reads as "useContext of null".
+    ssr: {
+      noExternal: ["@vizier/design", "lucide-react"],
     },
     server: {
       fs: { allow: [".."] },

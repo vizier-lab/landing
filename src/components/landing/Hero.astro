@@ -1,34 +1,32 @@
 ---
-import CourtBoard from "./CourtBoard";
-import { installCommand, versionLabel, docsUrl, repoUrl, releasesUrl } from "../../lib/site";
+import { Image } from "astro:assets";
+import chatDark from "../../assets/shots/chat-dark.png";
+import chatLight from "../../assets/shots/chat-light.png";
+import chatMobileDark from "../../assets/shots/chat-mobile-dark.png";
+import chatMobileLight from "../../assets/shots/chat-mobile-light.png";
+import { installCommand, repoUrl } from "../../lib/site";
 ---
 
 <section class="hero">
   <div class="shell hero__inner">
     <div class="hero__copy">
-      <div class="hero__meta reveal">
-        <span class="chip"><span class="chip-dot"></span>self-hosted</span>
-        <span class="chip">single binary</span>
-        <span class="chip">MIT</span>
-        <a class="chip" href={releasesUrl} target="_blank" rel="noopener noreferrer">
-          {versionLabel}
-        </a>
-      </div>
-
-      <h1 class="display-xl hero__title reveal reveal-2">
+      <h1 class="display-xl hero__title reveal">
         A digital steward<br />
         for <em>Your Majesty.</em>
       </h1>
 
-      <p class="lede reveal reveal-3">
+      <p class="lede reveal reveal-2">
         AI agents that remember who they are, and who you are. Hosted by you.
-        One Rust binary, many agents, every channel you already use.
+        Each agent keeps a written identity and a memory you can open, so a
+        decision made three weeks ago is still there on Monday — with the reason
+        and the receipt.
       </p>
 
-      <div class="hero__actions reveal reveal-4">
-        <a class="btn btn-primary" href={docsUrl}>Read the docs</a>
-        <a class="btn btn-secondary" href={`${repoUrl}`} target="_blank" rel="noopener noreferrer">
-          View on GitHub
+      <div class="hero__actions reveal reveal-3">
+        <a class="btn btn-primary" href="#install">Install Vizier</a>
+        <a class="btn btn-secondary" href="#inside">See what it remembers</a>
+        <a class="hero__gh-link mono" href={repoUrl} target="_blank" rel="noopener noreferrer">
+          GitHub ↗
         </a>
       </div>
 
@@ -36,17 +34,58 @@ import { installCommand, versionLabel, docsUrl, repoUrl, releasesUrl } from "../
         <code id="install-command">{installCommand}</code>
         <button class="copy-button" type="button" data-copy-target="install-command">Copy</button>
       </div>
-
-      <p class="mono-label reveal reveal-4" style="margin-top:2px">
-        Discord · Telegram · WebUI · REST · WebSocket
-      </p>
     </div>
 
-    <div class="hero__board reveal reveal-3">
-      <CourtBoard />
-      <p class="mono-label" style="margin-top:12px;text-align:right">
-        Illustrative court view · no private data
-      </p>
+    <div class="hero__shot reveal reveal-3">
+      <figure class="shot">
+        <div class="shot__frame">
+          <div class="shot__bar">
+            <span class="live-dot"></span>
+            <span class="shot__url">localhost:9999</span>
+            <span class="shot__tag">self-hosted</span>
+          </div>
+          <Image
+            class="shot__img shot__img--light"
+            src={chatLight}
+            alt="Vizier's WebUI showing a conversation with an agent called Seneschal. Asked for one sentence before a deadline, the agent answers with the tent deposit it needs approved, and the turn shows six script runs, nineteen recalled memory passages, and a cost under one cent."
+            widths={[720, 1080, 1440, 2160]}
+            sizes="(max-width: 860px) 100vw, 620px"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <Image
+            class="shot__img shot__img--dark"
+            src={chatDark}
+            alt="Vizier's WebUI in dark mode, showing the same turn: the agent's one-sentence answer, six script runs, nineteen recalled memory passages and the turn's cost."
+            widths={[720, 1080, 1440, 2160]}
+            sizes="(max-width: 860px) 100vw, 620px"
+            loading="eager"
+          />
+          <Image
+            class="shot__img shot__img--mobile shot__img--mobile-light"
+            src={chatMobileLight}
+            alt="Vizier's WebUI at phone size, showing the same conversation: the question, the turn's receipt of six script runs and nineteen recalled passages, and the agent's one-sentence answer."
+            widths={[390, 780]}
+            sizes="(max-width: 720px) 100vw, 1px"
+            loading="lazy"
+          />
+          <Image
+            class="shot__img shot__img--mobile shot__img--mobile-dark"
+            src={chatMobileDark}
+            alt="Vizier's WebUI at phone size in dark mode, showing the same conversation and turn receipt."
+            widths={[390, 780]}
+            sizes="(max-width: 720px) 100vw, 1px"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="shot__caption">
+          <span>
+            A real turn from a demo instance: nineteen passages recalled from
+            memory, six script runs, less than a cent.
+          </span>
+          <span class="mono">Seneschal · WebUI</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

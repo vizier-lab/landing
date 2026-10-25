@@ -1,0 +1,66 @@
+---
+import { url } from "../../lib/site";
+
+const providers = [
+  ["openai", "OpenAI"],
+  ["anthropic", "Anthropic"],
+  ["google", "Google"],
+  ["deepseek", "DeepSeek"],
+  ["openrouter", "OpenRouter"],
+  ["groq", "Groq"],
+  ["mistral", "Mistral"],
+  ["xai", "xAI"],
+  ["perplexity", "Perplexity"],
+  ["moonshotai", "Moonshot"],
+  ["zai", "Z.ai"],
+  ["minimax", "MiniMax"],
+  ["togetherai", "Together"],
+  ["cohere", "Cohere"],
+  ["huggingface", "Hugging Face"],
+  ["github-copilot", "Copilot"],
+  ["meta", "Meta"],
+  ["nvidia", "NVIDIA"],
+  ["amazon-bedrock", "Bedrock"],
+  ["ollama-cloud", "Ollama"],
+  ["cerebras", "Cerebras"],
+  ["deepinfra", "DeepInfra"],
+  ["fireworks-ai", "Fireworks"],
+  ["azure", "Azure"],
+];
+---
+
+<section class="section providers" id="providers">
+  <div class="shell">
+    <div class="section-head">
+      <div class="section-head__copy">
+        <h2 class="display-lg">The model you<br />already pay for.</h2>
+      </div>
+      <div class="section-head__aside">
+        <p class="body-copy">
+          Vizier does not resell model access. Point an agent at a frontier model
+          for the hard question and a local one for the routine — the key stays
+          yours, the rate limit stays yours, and every call is priced in the same
+          place.
+        </p>
+        <a class="mono section-head__link" href={url("/docs/configuration/providers/")}>
+          Browse providers →
+        </a>
+      </div>
+    </div>
+
+    <div class="provider-wall">
+      {providers.map(([id, name]) => (
+        <div class="provider-tile">
+          <img src={url(`/providers/${id}.svg`)} alt="" width="20" height="20" loading="lazy" />
+          <span>{name}</span>
+        </div>
+      ))}
+      <div class="provider-tile provider-tile--your">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+        <span>Any compatible endpoint</span>
+      </div>
+    </div>
+  </div>
+</section>

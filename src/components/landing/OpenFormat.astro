@@ -5,20 +5,18 @@ import { url } from "../../lib/site";
 <section class="ink-panel section">
   <div class="shell open-format">
     <div class="open-format__copy">
-      <p class="mono-label">OPEN BY DESIGN</p>
-      <h2 class="display-lg">The agent's memory is a folder you can read.</h2>
+      <h2 class="display-lg">Nothing here<br />locks you in.</h2>
       <p class="body-copy">
-        Long-term memory is plain markdown on disk: YAML frontmatter, a body,
-        and links between concepts. SQLite holds a derived index for search and
-        the graph, but the documents are the source of truth. Export a bundle as
-        a <span class="mono">.zip</span>; read it in any editor; move it
-        somewhere else.
+        A memory you cannot open is a memory you cannot correct, move or trust.
+        It is plain markdown in a folder: open it in any editor, put it in git,
+        copy it to another machine. The database holds a search index beside it;
+        the files stay the source of truth.
       </p>
       <ul class="open-format__list">
-        <li>CORE.md identity with revision history</li>
-        <li>Per-agent memory bundles, passages and a link graph</li>
-        <li>Dream cycle journals and checkpoints you can inspect</li>
-        <li>MIT licensed, no lock-in, no external services</li>
+        <li>An identity document whose every revision names its author</li>
+        <li>Memory you can search by passage, follow by link, and export as .zip</li>
+        <li>A nightly reflection written down, not hidden</li>
+        <li>MIT licensed, no external service, no lock-in</li>
       </ul>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <span class="chip chip-inverse">markdown</span>
@@ -35,7 +33,7 @@ import { url } from "../../lib/site";
       <div class="code-card">
         <div class="code-card__bar">
           <span>CORE.md</span>
-          <span class="mono" style="font-size:10px">identity</span>
+          <span class="mono" style="font-size:10px">rev 7 · dream cycle</span>
         </div>
         <pre><code><span class="tok-muted"># CORE.md</span>
 I am the Seneschal.
@@ -49,19 +47,18 @@ where a clear answer will do.</code></pre>
 
       <div class="code-card">
         <div class="code-card__bar">
-          <span>bundles/court/</span>
+          <span>seneschal/memory/court/</span>
           <span class="mono" style="font-size:10px">memory</span>
         </div>
-        <pre><code><span class="tok-muted">bundles/court/</span>
+        <pre><code><span class="tok-muted">seneschal/memory/court/</span>
   index.md          <span class="tok-muted"># maintained</span>
   log.md            <span class="tok-muted"># maintained</span>
-  charter.md        <span class="tok-live"># live passage</span>
-  lineage.md
+  festival.md       <span class="tok-live"># live passage</span>
   decisions.md
-  dreams/
-    2026-10-25.md
+  vendors.md
+  charter.md
 
-<span class="tok-muted">[charter] → [lineage] → [decisions]</span></code></pre>
+<span class="tok-muted">[festival] → [decisions] → [charter]</span></code></pre>
       </div>
     </div>
   </div>

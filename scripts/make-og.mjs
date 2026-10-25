@@ -22,7 +22,7 @@ function font(name, file) {
 
 const schibsted = font("schibsted-grotesk", "schibsted-grotesk-latin-wght-normal.woff2");
 const jetbrains = font("jetbrains-mono", "jetbrains-mono-latin-wght-normal.woff2");
-const mark = fs.readFileSync(path.join(root, "public", "favicon.svg"), "utf8");
+const mark = fs.readFileSync(path.join(root, "src", "assets", "mark.svg"), "utf8");
 
 const html = `<!doctype html>
 <html>
@@ -51,9 +51,11 @@ body {
   background-size: 24px 24px;
 }
 .top { display: flex; align-items: center; justify-content: space-between; }
-.brand { display: flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 700; letter-spacing: -0.03em; }
+.brand { display: flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 700; }
 .brand img { width: 58px; height: 58px; border-radius: 13px; }
-.brand .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #10b981; vertical-align: 0.55em; margin-left: 2px; }
+.brand .word { display: inline-flex; line-height: 1.23; }
+.brand .i { position: relative; display: inline-block; }
+.brand .i-dot { position: absolute; top: 0.254em; left: 50%; width: 0.155em; height: 0.155em; transform: translateX(-50%); border-radius: 9999px; background: #ededef; }
 .mono { font-family: "JetBrains Mono", monospace; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: #8b8b96; }
 h1 { margin: 0; font-size: 94px; line-height: 0.94; letter-spacing: -0.055em; font-weight: 600; max-width: 900px; }
 h1 em { font-style: normal; color: #10b981; }
@@ -67,7 +69,7 @@ h1 em { font-style: normal; color: #10b981; }
 <body>
   <div class="page">
     <div class="top">
-      <div class="brand"><img src="data:image/svg+xml;base64,${Buffer.from(mark).toString("base64")}" alt="" />vizier<span class="dot"></span></div>
+      <div class="brand"><img src="data:image/svg+xml;base64,${Buffer.from(mark).toString("base64")}" alt="" /><span class="word">v<span class="i">ı<span class="i-dot"></span></span>z<span class="i">ı<span class="i-dot"></span></span>er</span></div>
       <div class="mono">self-hosted · MIT</div>
     </div>
     <div>

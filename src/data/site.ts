@@ -5,11 +5,9 @@ export type NavItem = { label: string; href: string; external?: boolean };
 export const nav: NavItem[] = [
   { label: "Docs", href: "/docs/" },
   { label: "Blog", href: "/blog/" },
-  { label: "GitHub", href: "https://github.com/vizier-lab/vizier", external: true },
 ];
 
 export type Pillar = {
-  index: string;
   title: string;
   body: string;
   note: string;
@@ -17,22 +15,19 @@ export type Pillar = {
 
 export const pillars: Pillar[] = [
   {
-    index: "01",
-    title: "An agent with a self",
-    body: "Every agent has a CORE.md identity, long-term memory in open markdown bundles, and a dream cycle that reflects on what happened and folds it back in. Revision history is kept for both.",
-    note: "CORE.md · bundles · passages · dreams",
+    title: "It keeps what was decided.",
+    body: "Close the tab, come back in a month, and the reason for a choice is still there. Identity and memory are written down on your own disk, so a correction sticks the first time instead of being relearned in every conversation.",
+    note: "identity · memory · revisions",
   },
   {
-    index: "02",
-    title: "One binary. No services.",
-    body: "Vizier is a Rust binary with embedded SQLite, its own WebUI, and no config file requirement. Run it bare, in Docker, under systemd. Nothing else to install or operate.",
-    note: "Rust · SQLite · config-less · Docker",
+    title: "It does the upkeep.",
+    body: "The recurring work runs without you: a ledger review, a reminder before a renewal, a nightly pass that folds the day into memory. Every run leaves a report, and a failure is shown as a failure, not lost in a log.",
+    note: "tasks · nightly reflection · reports",
   },
   {
-    index: "03",
-    title: "A court, not a chatbot",
-    body: "Many agents run at once, isolated from each other: their own provider, tools, MCP clients, shell, memory and channels. Each can hold its own presence on Discord, Telegram and the WebUI.",
-    note: "Discord · Telegram · WebUI · REST/WS",
+    title: "It runs on your keys.",
+    body: "One binary with its database inside. There is no queue, no account service and no vendor between you and the model. The whole court fits on a small server, and the bill is yours to see — line by line.",
+    note: "one binary · SQLite · Docker",
   },
 ];
 
@@ -46,51 +41,27 @@ export type Feature = {
 export const features: Feature[] = [
   {
     icon: "square-terminal",
-    title: "Code mode",
-    body: "The model writes Python in an isolated sandbox and calls tools as functions, so a whole loop of work stays outside the context window.",
-    meta: "execute_python",
-  },
-  {
-    icon: "agent",
-    title: "29 providers",
-    body: "Ollama, OpenAI, Anthropic, Google, OpenRouter, GitHub Copilot, ChatGPT OAuth, and any OpenAI-compatible endpoint you bring.",
-    meta: "models.dev + custom",
+    title: "Many tools, one small conversation",
+    body: "The agent writes a short program to call the tools it needs — search, files, another agent — checks the result, then answers. Long work happens in visible steps instead of filling the context, and the same job runs the same way next time.",
+    meta: "scripts · tool calls · data first",
   },
   {
     icon: "mcp",
-    title: "Integrations",
-    body: "Discord and Telegram bots, Brave search, and per-agent MCP servers. Every integration belongs to exactly one agent.",
+    title: "Where people already talk",
+    body: "Discord and Telegram are first-class, not webhooks bolted on. Every integration belongs to exactly one agent, so a token or a tool cannot reach sideways into another agent's conversations.",
     meta: "channels · addons · MCP",
   },
   {
     icon: "calendar",
-    title: "Scheduled work",
-    body: "Cron and one-time tasks run unattended, record a task run, and report back what happened. The running row is the overlap lock.",
+    title: "Recurring work, accounted for",
+    body: "Scheduled and one-off tasks run without you and write down what happened. The agent can schedule its own follow-ups, and each run keeps the answer it produced, so a quiet week is evidence rather than a guess.",
     meta: "tasks · task runs",
   },
   {
-    icon: "layers",
-    title: "Background jobs",
-    body: "Delegate pieces of a job to other agents and sessions. They report back into the conversation that launched them, exactly once.",
-    meta: "delegate · report",
-  },
-  {
     icon: "users",
-    title: "One or many people",
-    body: "JWT and API keys, roles with granular permissions, agent ownership and sharing. A solo self-hoster pays no complexity tax for a team.",
-    meta: "roles · ownership",
-  },
-  {
-    icon: "skills",
-    title: "Skills",
-    body: "Reusable SKILL.md packages with resources and scripts, global or per-agent, installable from a registry, git, or a local path.",
-    meta: "SKILL.md",
-  },
-  {
-    icon: "usage",
-    title: "Usage and cost",
-    body: "Every answered completion is recorded and priced against the catalogue. See what each agent, session and channel costs.",
-    meta: "tokens · estimate",
+    title: "One person, or a household",
+    body: "Start alone and invite people later. Roles, ownership and scoped access decide who can see or change which agent, and stay out of the way until there is more than one of you.",
+    meta: "roles · ownership · API keys",
   },
 ];
 

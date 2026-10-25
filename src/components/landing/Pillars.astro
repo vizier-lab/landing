@@ -4,22 +4,20 @@ import { pillars } from "../../data/site";
 
 <section class="section">
   <div class="shell">
-    <div style="display:flex;justify-content:space-between;gap:32px;align-items:flex-end;flex-wrap:wrap;margin-bottom:48px">
-      <div style="display:flex;flex-direction:column;gap:14px;max-width:44rem">
-        <p class="mono-label">THE STEWARD</p>
+    <div class="section-head">
+      <div class="section-head__copy">
         <h2 class="display-lg">An agent is someone,<br />not a widget.</h2>
       </div>
-      <p class="body-copy" style="max-width:27rem">
-        Vizier treats identity, memory and growth as first-class parts of an
-        agent. The court is visible: what each agent knows, what it did, and what
-        it cost.
+      <p class="body-copy section-head__note">
+        Most assistants reset every time the tab closes, so every correction is
+        thrown away. The fix is not a longer context window. It is a record that
+        outlives it.
       </p>
     </div>
 
     <div class="pillars">
       {pillars.map((pillar) => (
         <article class="pillar">
-          <span class="pillar__index">{pillar.index}</span>
           <h3>{pillar.title}</h3>
           <p>{pillar.body}</p>
           <span class="pillar__note">{pillar.note}</span>

@@ -85,15 +85,6 @@ header.header {
   backdrop-filter: blur(14px);
 }
 
-.site-title {
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-.site-title img {
-  border-radius: 7px;
-}
-
 .sidebar-pane {
   border-inline-end: 1px solid var(--vz-border);
 }

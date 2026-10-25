@@ -1,5 +1,7 @@
 ---
+import mark from "../../assets/mark.svg";
 import { versionLabel, repoUrl, releasesUrl, issuesUrl, docsUrl, blogUrl, url } from "../../lib/site";
+import Wordmark from "./Wordmark.astro";
 
 const year = new Date().getFullYear();
 ---
@@ -9,8 +11,8 @@ const year = new Date().getFullYear();
     <div class="site-footer__grid">
       <div class="site-footer__brand">
         <a class="brand" href={url("/")} aria-label="Vizier home">
-          <img src={url("/favicon.svg")} alt="" width="30" height="30" />
-          <span class="brand__name">vizier<span class="brand__dot"></span></span>
+          <img src={mark.src} alt="" width="30" height="30" />
+          <Wordmark size={20} state="live" />
         </a>
         <p>
           A digital steward for Your Majesty. AI agents that remember who they
@@ -50,7 +52,7 @@ const year = new Date().getFullYear();
 
     <div class="site-footer__bottom">
       <span>© {year} Vizier · MIT licensed · self-hosted by design</span>
-      <span>docs &amp; blog from the same source as the binary</span>
+      <span>docs &amp; blog versioned with the binary</span>
     </div>
   </div>
 </footer>

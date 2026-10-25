@@ -1,0 +1,32 @@
+---
+import mark from "../../assets/mark.svg";
+import Wordmark from "./Wordmark.astro";
+
+const { siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a class="docs-title" href={siteTitleHref} aria-label="Vizier home">
+  <img src={mark.src} alt="" width="28" height="28" />
+  <Wordmark size={20} />
+</a>
+
+<style>
+  /* Starlight's SiteTitle styles are scoped to its own component, so this
+     override carries the layout the header expects. */
+  .docs-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .docs-title img {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+</style>
