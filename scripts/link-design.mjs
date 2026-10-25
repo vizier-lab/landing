@@ -64,10 +64,15 @@ if (!fs.existsSync(path.join(designDir, "package.json"))) {
   process.exit(1);
 }
 
-// A real directory (for example a design git submodule) is left alone.
+// A real design package (for example a design git submodule) is left alone.
+// An empty `design/` can be left behind by npm while resolving the file
+// dependency; remove that so the symlink can be created.
 if (fs.existsSync(linkPath) && !fs.lstatSync(linkPath).isSymbolicLink()) {
-  console.log("design/ is a real directory; leaving it as it is.");
-  process.exit(0);
+  if (fs.existsSync(path.join(linkPath, "package.json"))) {
+    console.log("design/ is a real package; leaving it as it is.");
+    process.exit(0);
+  }
+  fs.rmSync(linkPath, { recursive: true, force: true });
 }
 
 const target = path.relative(root, designDir);
