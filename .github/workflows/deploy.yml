@@ -1,0 +1,120 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [vizier-release]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to display (for example 0.13.2); defaults to the latest release"
+        required: false
+        type: string
+      ref:
+        description: "Vizier git ref to take docs and design from"
+        required: false
+        default: master
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout landing
+        uses: actions/checkout@v4
+
+      - name: Checkout vizier
+        uses: actions/checkout@v4
+        with:
+          repository: vizier-lab/vizier
+          ref: ${{ github.event.client_payload.ref || inputs.ref || 'master' }}
+          path: .vizier-source
+          fetch-depth: 1
+
+      - name: Checkout design
+        run: git -C .vizier-source submodule update --init design
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install design dependencies
+        run: (cd .vizier-source/design && npm ci --no-audit --no-fund)
+
+      - name: Link design into the site
+        run: VIZIER_SOURCE=.vizier-source node scripts/link-design.mjs
+
+      - name: Install site dependencies
+        env:
+          VIZIER_SOURCE: .vizier-source
+        run: npm ci --no-audit --no-fund
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Resolve version
+        id: meta
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAYLOAD_VERSION: ${{ github.event.client_payload.version }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          VERSION="${PAYLOAD_VERSION:-${INPUT_VERSION:-}}"
+          if [ -z "$VERSION" ]; then
+            VERSION=$(gh api repos/vizier-lab/vizier/releases/latest --jq .tag_name 2>/dev/null | sed 's/^v//' || true)
+          fi
+          VERSION="${VERSION:-latest}"
+          if [ "$VERSION" != "latest" ] && ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?$'; then
+            echo "::error::Invalid version: $VERSION"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Version: $VERSION"
+
+      - name: Build site
+        env:
+          VIZIER_SOURCE: .vizier-source
+          VIZIER_VERSION: ${{ steps.meta.outputs.version }}
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: npm run build
+
+      - name: Check internal links
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: npm run check-links
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

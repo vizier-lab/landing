@@ -1,0 +1,52 @@
+---
+import CourtBoard from "./CourtBoard";
+import { installCommand, versionLabel, docsUrl, repoUrl, releasesUrl } from "../../lib/site";
+---
+
+<section class="hero">
+  <div class="shell hero__inner">
+    <div class="hero__copy">
+      <div class="hero__meta reveal">
+        <span class="chip"><span class="chip-dot"></span>self-hosted</span>
+        <span class="chip">single binary</span>
+        <span class="chip">MIT</span>
+        <a class="chip" href={releasesUrl} target="_blank" rel="noopener noreferrer">
+          {versionLabel}
+        </a>
+      </div>
+
+      <h1 class="display-xl hero__title reveal reveal-2">
+        A digital steward<br />
+        for <em>Your Majesty.</em>
+      </h1>
+
+      <p class="lede reveal reveal-3">
+        AI agents that remember who they are, and who you are. Hosted by you.
+        One Rust binary, many agents, every channel you already use.
+      </p>
+
+      <div class="hero__actions reveal reveal-4">
+        <a class="btn btn-primary" href={docsUrl}>Read the docs</a>
+        <a class="btn btn-secondary" href={`${repoUrl}`} target="_blank" rel="noopener noreferrer">
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="install-line reveal reveal-4">
+        <code id="install-command">{installCommand}</code>
+        <button class="copy-button" type="button" data-copy-target="install-command">Copy</button>
+      </div>
+
+      <p class="mono-label reveal reveal-4" style="margin-top:2px">
+        Discord · Telegram · WebUI · REST · WebSocket
+      </p>
+    </div>
+
+    <div class="hero__board reveal reveal-3">
+      <CourtBoard />
+      <p class="mono-label" style="margin-top:12px;text-align:right">
+        Illustrative court view · no private data
+      </p>
+    </div>
+  </div>
+</section>

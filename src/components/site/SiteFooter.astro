@@ -1,0 +1,56 @@
+---
+import { versionLabel, repoUrl, releasesUrl, issuesUrl, docsUrl, blogUrl, url } from "../../lib/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="brand" href={url("/")} aria-label="Vizier home">
+          <img src={url("/favicon.svg")} alt="" width="30" height="30" />
+          <span class="brand__name">vizier<span class="brand__dot"></span></span>
+        </a>
+        <p>
+          A digital steward for Your Majesty. AI agents that remember who they
+          are, and who you are. Hosted by you.
+        </p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
+          <span class="chip"><span class="chip-dot"></span>{versionLabel}</span>
+          <span class="chip">MIT</span>
+          <span class="chip">Rust</span>
+        </div>
+      </div>
+
+      <div class="site-footer__col">
+        <h3>Documentation</h3>
+        <a href={docsUrl}>Documentation home</a>
+        <a href={url("/docs/getting-started/installation/")}>Installation</a>
+        <a href={url("/docs/getting-started/quick-start/")}>Quick start</a>
+        <a href={url("/docs/configuration/")}>Configuration</a>
+        <a href={url("/docs/api-integration/rest-api/")}>REST API</a>
+      </div>
+
+      <div class="site-footer__col">
+        <h3>Writing</h3>
+        <a href={blogUrl}>Blog</a>
+        <a href={url("/rss.xml")}>RSS feed</a>
+        <a href={releasesUrl} target="_blank" rel="noopener noreferrer">Releases</a>
+      </div>
+
+      <div class="site-footer__col">
+        <h3>Project</h3>
+        <a href={repoUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={issuesUrl} target="_blank" rel="noopener noreferrer">Issues</a>
+        <a href={`${repoUrl}/blob/master/LICENSE`} target="_blank" rel="noopener noreferrer">License</a>
+        <a href="https://get.vizier.rs" target="_blank" rel="noopener noreferrer">Installer</a>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>© {year} Vizier · MIT licensed · self-hosted by design</span>
+      <span>docs &amp; blog from the same source as the binary</span>
+    </div>
+  </div>
+</footer>

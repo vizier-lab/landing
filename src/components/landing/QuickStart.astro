@@ -1,0 +1,48 @@
+---
+import { startMethods } from "../../data/site";
+import { url } from "../../lib/site";
+---
+
+<section class="section" id="install">
+  <div class="shell quickstart">
+    <div class="quickstart__head">
+      <p class="mono-label">QUICK START</p>
+      <h2 class="display-lg">A steward<br />in one command.</h2>
+      <p class="body-copy">
+        Run it on your machine, point it at a provider, and open the WebUI.
+        There is no external database, queue or account service to stand up
+        first.
+      </p>
+      <a class="mono" style="font-size:11px;color:var(--vz-live-text)" href={url("/docs/getting-started/installation/")}>
+        Full installation guide →
+      </a>
+    </div>
+
+    <div class="tabs">
+      <input type="radio" name="start-method" id="start-script" checked />
+      <input type="radio" name="start-method" id="start-docker" />
+      <input type="radio" name="start-method" id="start-cargo" />
+
+      <div class="tabs__labels">
+        {startMethods.map((method) => (
+          <label for={`start-${method.id}`}>{method.label}</label>
+        ))}
+      </div>
+
+      <div class="tabs__panels">
+        {startMethods.map((method) => (
+          <div class="tabs__panel">
+            <h3>{method.title}</h3>
+            <div class="command">
+              <pre><code id={`command-${method.id}`}>{method.command}</code></pre>
+              <button class="copy-button" type="button" data-copy-target={`command-${method.id}`}>
+                Copy
+              </button>
+            </div>
+            <p>{method.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

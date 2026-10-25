@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import { url } from "../../lib/site";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const latest = posts[0];
+
+const date = latest
+  ? new Intl.DateTimeFormat("en", { day: "numeric", month: "short", year: "numeric" }).format(
+      latest.data.date,
+    )
+  : "";
+const latestSlug = latest?.id.replace(/\.md$/, "");
+---
+
+<section class="section" style="padding-top:0">
+  <div class="shell">
+    <div class="teasers">
+      <article class="teaser">
+        <p class="mono-label">DOCUMENTATION</p>
+        <h3>From first run to a working court.</h3>
+        <p>
+          Installation, providers, channels, agents, memory, skills, MCP,
+          observability and the API. The docs are built from the same source as
+          the binary.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="chip">quick start</span>
+          <span class="chip">configuration</span>
+          <span class="chip">REST API</span>
+        </div>
+        <a class="teaser__link" href={url("/docs/")}>Open the docs →</a>
+      </article>
+
+      <article class="teaser">
+        <p class="mono-label">FROM THE COURT</p>
+        {latest ? (
+          <>
+            <h3>
+              <a href={url(`/blog/${latestSlug}/`)}>{latest.data.title}</a>
+            </h3>
+            <p>{latest.data.description}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <span class="chip">{date}</span>
+              {latest.data.tags.slice(0, 2).map((tag) => <span class="chip">{tag}</span>)}
+            </div>
+            <a class="teaser__link" href={url(`/blog/${latestSlug}/`)}>Read the post →</a>
+          </>
+        ) : (
+          <>
+            <h3>Notes from the court.</h3>
+            <p>Product notes, release writing and the occasional technical essay.</p>
+            <a class="teaser__link" href={url("/blog/")}>Open the blog →</a>
+          </>
+        )}
+      </article>
+    </div>
+  </div>
+</section>

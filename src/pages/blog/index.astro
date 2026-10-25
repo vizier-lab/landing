@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/blog/PostCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { url } from "../../lib/site";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Blog — Vizier"
+  description="Notes from the court: product writing, release notes and technical essays from the Vizier project."
+>
+  <section class="blog-hero">
+    <div class="shell">
+      <p class="mono-label">FROM THE COURT</p>
+      <h1 class="display-lg" style="margin-top:16px">Notes from<br />the court.</h1>
+      <p class="lede" style="margin-top:22px">
+        Product writing, release notes and technical essays from the Vizier
+        project. No growth-hacking, no thought-leadership.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
+        <a class="btn btn-secondary btn-small" href={url("/rss.xml")}>RSS feed</a>
+        <a class="btn btn-ghost btn-small" href={url("/docs/")}>Documentation →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="shell">
+      {posts.length > 0 ? (
+        <div class="blog-list">
+          {posts.map((post) => <PostCard post={post} />)}
+        </div>
+      ) : (
+        <p class="body-copy">The first notes are being written.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

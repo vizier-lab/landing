@@ -1,0 +1,279 @@
+@import "@vizier/design/tokens.css";
+@import "@fontsource-variable/schibsted-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* -------------------------------------------------------------------------
+   Map Starlight onto the Vizier design tokens.
+   The token values switch under :root[data-theme="dark"], so the docs follow
+   the same theme as the rest of the site without a second palette.
+   ---------------------------------------------------------------------- */
+
+:root,
+:root[data-theme="dark"] {
+  --sl-font: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --sl-font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sl-font-system: var(--sl-font);
+  --sl-font-system-mono: var(--sl-font-mono);
+
+  --sl-color-white: var(--vz-text);
+  --sl-color-black: var(--vz-ground);
+
+  --sl-color-bg: var(--vz-ground);
+  --sl-color-bg-nav: var(--vz-ground);
+  --sl-color-bg-sidebar: var(--vz-sidebar);
+  --sl-color-bg-inline-code: var(--vz-surface);
+  --sl-color-bg-accent: var(--vz-surface);
+  --sl-color-bg-badge: var(--vz-surface);
+
+  --sl-color-hairline: var(--vz-border);
+  --sl-color-hairline-light: var(--vz-border);
+  --sl-color-hairline-shade: var(--vz-border);
+
+  --sl-color-text: var(--vz-text);
+  --sl-color-text-accent: var(--vz-live-text);
+  --sl-color-text-invert: var(--vz-ground);
+  --sl-color-text-badge: var(--vz-text-muted);
+
+  --sl-color-accent: var(--vz-live);
+  --sl-color-accent-low: var(--vz-rank-bg);
+  --sl-color-accent-high: var(--vz-live-text);
+
+  --sl-color-gray-1: var(--vz-text);
+  --sl-color-gray-2: var(--vz-text-soft);
+  --sl-color-gray-3: var(--vz-text-muted);
+  --sl-color-gray-4: var(--vz-text-faint);
+  --sl-color-gray-5: var(--vz-border-strong);
+  --sl-color-gray-6: var(--vz-border);
+  --sl-color-gray-7: var(--vz-surface);
+
+  --sl-color-blue: var(--vz-rank);
+  --sl-color-blue-low: var(--vz-rank-bg);
+  --sl-color-blue-high: var(--vz-rank-text);
+  --sl-color-green: var(--vz-live);
+  --sl-color-green-low: var(--vz-surface);
+  --sl-color-green-high: var(--vz-live-text);
+  --sl-color-orange: var(--vz-retrying);
+  --sl-color-orange-low: var(--vz-retrying-bg);
+  --sl-color-orange-high: var(--vz-retrying);
+  --sl-color-red: var(--vz-failed);
+  --sl-color-red-low: var(--vz-failed-bg);
+  --sl-color-red-high: var(--vz-failed-text);
+
+  --sl-color-border-badge: var(--vz-border);
+  --sl-color-asides-border: var(--vz-border-strong);
+  --sl-color-asides-text-accent: var(--vz-text);
+  --sl-color-backdrop-overlay: color-mix(in srgb, var(--vz-ground) 72%, transparent);
+
+  --sl-card-bg: var(--vz-surface);
+  --sl-card-border: var(--vz-border);
+  --sl-details-border-color: var(--vz-border);
+  --sl-details-border-color--hover: var(--vz-border-strong);
+
+  --sl-content-width: 52rem;
+  --sl-sidebar-width: 18rem;
+  --sl-content-pad-x: 2rem;
+  --sl-content-gap-y: 1rem;
+}
+
+/* -------------------------------------------------------------------------
+   Shell
+   ---------------------------------------------------------------------- */
+
+header.header {
+  border-bottom: 1px solid var(--vz-border);
+  background: color-mix(in srgb, var(--vz-ground) 90%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.site-title {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.site-title img {
+  border-radius: 7px;
+}
+
+.sidebar-pane {
+  border-inline-end: 1px solid var(--vz-border);
+}
+
+.right-sidebar-panel {
+  border-inline-start: 1px solid var(--vz-border);
+}
+
+.sl-link-button {
+  border-radius: var(--vz-radius-md);
+}
+
+/* -------------------------------------------------------------------------
+   Reading
+   ---------------------------------------------------------------------- */
+
+.sl-markdown-content {
+  color: var(--vz-text-soft);
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4 {
+  font-family: var(--sl-font);
+  color: var(--vz-text);
+  letter-spacing: -0.025em;
+}
+
+.sl-markdown-content h1 {
+  font-size: clamp(2rem, 3.2vw, 2.65rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.sl-markdown-content h2 {
+  margin-top: 2.4em;
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+.sl-markdown-content h3 {
+  margin-top: 1.8em;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.sl-markdown-content p,
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  max-width: 72ch;
+}
+
+.sl-markdown-content a {
+  color: var(--vz-live-text);
+  text-decoration-color: color-mix(in srgb, var(--vz-live) 35%, transparent);
+  text-underline-offset: 3px;
+}
+
+.sl-markdown-content a:hover {
+  text-decoration-color: currentColor;
+}
+
+.sl-markdown-content strong {
+  color: var(--vz-text);
+  font-weight: 600;
+}
+
+.sl-markdown-content code:not(pre code) {
+  border: 1px solid var(--vz-border);
+  border-radius: var(--vz-radius-xs);
+  background: var(--vz-surface);
+  padding: 1px 5px;
+  font-family: var(--sl-font-mono);
+  font-size: 0.88em;
+  color: var(--vz-text);
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start: 2px solid var(--vz-live);
+  background: transparent;
+  color: var(--vz-text-muted);
+}
+
+.sl-markdown-content table {
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.sl-markdown-content th {
+  background: var(--vz-surface);
+  color: var(--vz-text);
+  font-weight: 600;
+}
+
+.sl-markdown-content th,
+.sl-markdown-content td {
+  border-color: var(--vz-border);
+}
+
+.sl-markdown-content hr {
+  border-color: var(--vz-border);
+}
+
+.sl-markdown-content .expressive-code {
+  margin-block: 1.5rem;
+}
+
+.expressive-code .frame {
+  border-radius: var(--vz-radius-lg);
+  border: 1px solid var(--vz-border);
+  box-shadow: none;
+}
+
+/* -------------------------------------------------------------------------
+   Navigation
+   ---------------------------------------------------------------------- */
+
+.sidebar-content a,
+.sidebar-content summary {
+  font-size: 13px;
+}
+
+.sidebar-content a[aria-current="page"],
+.sidebar-content a[aria-current="page"]:hover {
+  background: var(--vz-raised);
+  color: var(--vz-text);
+}
+
+.sidebar-content a:hover {
+  color: var(--vz-text);
+}
+
+starlight-menu-button button {
+  border-radius: var(--vz-radius-sm);
+}
+
+/* -------------------------------------------------------------------------
+   Misc
+   ---------------------------------------------------------------------- */
+
+.sl-anchor-link {
+  color: var(--vz-text-faint);
+}
+
+.sl-anchor-link:hover {
+  color: var(--vz-live-text);
+}
+
+.pagination-links a {
+  border-radius: var(--vz-radius-md);
+  border-color: var(--vz-border);
+}
+
+.pagination-links a:hover {
+  border-color: var(--vz-border-strong);
+  background: var(--vz-surface);
+}
+
+.sl-markdown-content .starlight-aside {
+  border-radius: var(--vz-radius-md);
+}
+
+.sl-markdown-content .starlight-aside--caution {
+  border-color: var(--vz-retrying-line);
+  background: var(--vz-retrying-bg);
+  color: var(--vz-text-soft);
+}
+
+.sl-markdown-content .starlight-aside--note {
+  border-color: var(--vz-border-strong);
+  background: var(--vz-surface);
+  color: var(--vz-text-soft);
+}
+
+@media (max-width: 50rem) {
+  :root {
+    --sl-content-pad-x: 1.25rem;
+  }
+}

@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout landing
+        uses: actions/checkout@v4
+
+      - name: Checkout vizier
+        uses: actions/checkout@v4
+        with:
+          repository: vizier-lab/vizier
+          ref: master
+          path: .vizier-source
+          fetch-depth: 1
+
+      - name: Checkout design
+        run: git -C .vizier-source submodule update --init design
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install design dependencies
+        run: (cd .vizier-source/design && npm ci --no-audit --no-fund)
+
+      - name: Link design into the site
+        run: VIZIER_SOURCE=.vizier-source node scripts/link-design.mjs
+
+      - name: Install site dependencies
+        env:
+          VIZIER_SOURCE: .vizier-source
+        run: npm ci --no-audit --no-fund
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Type and Astro checks
+        run: npm run check
+
+      - name: Build
+        env:
+          VIZIER_SOURCE: .vizier-source
+          SITE_URL: https://vizier-lab.github.io
+          BASE_PATH: /landing
+          VIZIER_VERSION: latest
+        run: npm run build
+
+      - name: Check internal links
+        env:
+          BASE_PATH: /landing
+        run: npm run check-links

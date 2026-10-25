@@ -1,0 +1,49 @@
+---
+import { Icon } from "@vizier/design";
+import { features } from "../../data/site";
+import { url } from "../../lib/site";
+---
+
+<section class="section" style="padding-top:0">
+  <div class="shell">
+    <div style="display:flex;justify-content:space-between;gap:32px;align-items:flex-end;flex-wrap:wrap;margin-bottom:40px">
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:42rem">
+        <p class="mono-label">UNDER THE HOOD</p>
+        <h2 class="display-lg">A full court,<br />quietly operated.</h2>
+      </div>
+      <a class="mono" style="font-size:11px;color:var(--vz-live-text)" href={url("/docs/configuration/")}>
+        Read the configuration docs →
+      </a>
+    </div>
+
+    <div class="features">
+      {features.map((feature) => (
+        <article class="feature">
+          <span class="feature__icon">
+            <Icon name={feature.icon} size={15} />
+          </span>
+          <div class="feature__body">
+            <h3>{feature.title}</h3>
+            <p>{feature.body}</p>
+            <span class="feature__meta">{feature.meta}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="provider-strip">
+      <div>
+        <p class="mono-label">29 PROVIDERS · ONE INTERFACE</p>
+        <p class="provider-strip__names">
+          Ollama · llama.cpp · OpenAI · Anthropic · Google · DeepSeek · OpenRouter
+          · Groq · Mistral · xAI · Perplexity · Moonshot · Z.ai · MiniMax ·
+          Together · Cohere · Hugging Face · Hyperbolic · Voyage AI · GitHub
+          Copilot · ChatGPT OAuth
+        </p>
+      </div>
+      <a class="mono" style="font-size:11px;color:var(--vz-live-text);white-space:nowrap" href={url("/docs/configuration/providers/")}>
+        See providers →
+      </a>
+    </div>
+  </div>
+</section>

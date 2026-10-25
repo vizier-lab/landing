@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FeatureGrid from "../components/landing/FeatureGrid.astro";
+import Hero from "../components/landing/Hero.astro";
+import OpenFormat from "../components/landing/OpenFormat.astro";
+import Pillars from "../components/landing/Pillars.astro";
+import QuickStart from "../components/landing/QuickStart.astro";
+import Teasers from "../components/landing/Teasers.astro";
+---
+
+<BaseLayout
+  title="Vizier — A digital steward for Your Majesty."
+  description="Self-hosted AI agents that remember who they are, and who you are. One Rust binary, many agents, Discord, Telegram, WebUI, REST and WebSocket."
+>
+  <Hero />
+  <Pillars />
+  <FeatureGrid />
+  <OpenFormat />
+  <QuickStart />
+  <Teasers />
+</BaseLayout>

@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+.DS_Store
+
+# Generated: a relative symlink to the vizier checkout's design/ directory.
+/design
+
+# Generated from vizier/docs/src at build time.
+/src/content/docs/docs/
+
+# Local screenshots and scratch space.
+/.screenshots/
