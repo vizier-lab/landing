@@ -92,7 +92,7 @@ After changing docs in the vizier checkout, run `npm run sync` (or restart
 
 The landing repository owns the GitHub Pages site.
 
-- Push to `main` → build and deploy.
+- Push to `master` → build and deploy.
 - `repository_dispatch` of type `vizier-release` → build and deploy with the
   version and docs ref in the payload.
 - `workflow_dispatch` → manual deploy with optional `version` and `ref`.
