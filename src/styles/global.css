@@ -586,29 +586,39 @@ input {
   mask-image: linear-gradient(to bottom, black, transparent 78%);
 }
 
-/* The whole hero — copy and the running app — sits inside one window, so the
-   first thing a visitor sees is the product itself, not a cropped hint of it. */
+/* Copy on top, the running app below at the full shell width: side by side the
+   screenshot was ~570px wide and its text unreadable. On wide screens the title
+   sits beside the lede and actions so the copy stays short and the top of the
+   app shows above the fold. */
 .hero__inner {
   position: relative;
-  display: grid;
-  min-height: calc(100vh - 64px);
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: clamp(32px, 4vw, 60px);
-  align-items: center;
-  padding-block: clamp(32px, 5vh, 64px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vh, 48px);
+  padding-block: clamp(40px, 6vh, 72px) clamp(32px, 5vh, 56px);
 }
 
 .hero__copy {
-  display: flex;
+  display: grid;
   min-width: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: start;
+  gap: 20px clamp(32px, 5vw, 80px);
+}
+
+.hero__copy > * {
+  grid-column: 2;
+  justify-self: start;
+}
+
+.hero__copy > .hero__title {
+  grid-column: 1;
+  grid-row: 1 / span 3;
 }
 
 .hero__title {
   max-width: 18ch;
-  font-size: clamp(2.75rem, 4.2vw, 4.25rem);
+  font-size: clamp(2.75rem, 5vw, 4.75rem);
   line-height: 0.98;
 }
 
@@ -759,11 +769,18 @@ input {
 
 @media (max-width: 980px) {
   .hero__inner {
-    display: flex;
-    min-height: 0;
-    flex-direction: column;
     align-items: stretch;
     padding-block: clamp(48px, 8vw, 72px) clamp(28px, 5vw, 44px);
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero__copy > .hero__title {
+    grid-row: auto;
   }
 
   .hero__title {
