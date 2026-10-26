@@ -95,8 +95,17 @@ The landing repository owns the GitHub Pages site.
 - Push to `master` → build and deploy.
 - `repository_dispatch` of type `vizier-release` → build and deploy with the
   version and docs ref in the payload.
+- `repository_dispatch` of type `design-updated` → build and deploy with the
+  catalogue taken from the design commit in `client_payload.sha`.
 - `workflow_dispatch` → manual deploy with optional `version` and `ref`.
 - A `vizier` docs change can dispatch the same event with `ref: master`.
+
+Every deploy also builds the design system's Storybook and publishes it at
+`/design`. The catalogue source is `vizier-lab/design` at the dispatched commit,
+or `master` for any other deploy — deliberately the current design, not vizier's
+submodule pin, so a design push publishes without waiting for a pin bump. That
+build happens before the Pages artifact is uploaded, so a Storybook that fails
+to build fails the deploy instead of shipping a broken catalogue.
 
 `vizier` sends the dispatch from its release workflow. It needs a
 `LANDING_DISPATCH_TOKEN` repository secret: a fine-grained PAT scoped to

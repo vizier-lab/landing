@@ -4,7 +4,9 @@ on:
   push:
     branches: [master]
   repository_dispatch:
-    types: [vizier-release]
+    # vizier-release: a release (docs and version chip)
+    # design-updated: a push to vizier-lab/design; the catalogue is rebuilt too
+    types: [vizier-release, design-updated]
   workflow_dispatch:
     inputs:
       version:
@@ -97,10 +99,37 @@ jobs:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: npm run build
 
+      # The catalogue is published at /design and is part of this site, so it is
+      # built on every deploy. A design push dispatches this workflow with that
+      # commit in client_payload.sha; any other deploy takes design master, so
+      # the catalogue always shows the current design rather than vizier's pin.
+      - name: Checkout design catalogue
+        uses: actions/checkout@v4
+        with:
+          repository: vizier-lab/design
+          ref: ${{ github.event.client_payload.sha || 'master' }}
+          path: .design-catalogue
+          fetch-depth: 1
+
+      - name: Build the catalogue
+        run: |
+          set -euo pipefail
+          cd .design-catalogue
+          npm ci --no-audit --no-fund
+          npm run build-storybook
+
       - name: Check internal links
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: npm run check-links
+
+      # After the link check: Storybook's manager links are built at runtime, so
+      # its HTML has nothing for the checker to resolve and nothing to add here.
+      - name: Add the catalogue to the site
+        run: |
+          set -euo pipefail
+          mkdir -p dist/design
+          cp -R .design-catalogue/storybook-static/. dist/design/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
