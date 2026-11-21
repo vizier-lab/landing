@@ -16,3 +16,6 @@ dist/
 
 # CI checkout of the vizier source.
 /.vizier-source/
+
+# Generated: docs screenshots copied from vizier/docs/src/images.
+/public/docs/images/

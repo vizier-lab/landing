@@ -16,73 +16,139 @@ export const sidebar = [
     "label": "Getting Started",
     "items": [
       {
-        "label": "Installation",
-        "link": "/docs/getting-started/installation/"
+        "label": "Choose an Edition",
+        "link": "/docs/getting-started/editions/"
       },
       {
-        "label": "Quick Start",
-        "link": "/docs/getting-started/quick-start/"
-      },
-      {
-        "label": "Building from Source",
-        "link": "/docs/getting-started/contributing/"
+        "label": "Your First Agent",
+        "link": "/docs/getting-started/first-agent/"
       }
     ]
   },
   {
-    "label": "Configuration",
+    "label": "Server Edition",
     "items": [
       {
-        "label": "Overview",
-        "link": "/docs/configuration/"
+        "label": "Install the Server",
+        "link": "/docs/server/installation/"
+      },
+      {
+        "label": "Quick Start",
+        "link": "/docs/server/quick-start/"
       },
       {
         "label": "Main Configuration",
         "link": "/docs/configuration/main-config/"
       },
       {
-        "label": "Providers",
-        "link": "/docs/configuration/providers/"
-      },
-      {
-        "label": "Channels",
-        "link": "/docs/configuration/channels/"
-      },
-      {
-        "label": "Tools & Embedding",
-        "link": "/docs/configuration/tools-embedding/"
+        "label": "CLI",
+        "link": "/docs/configuration/cli/"
       },
       {
         "label": "Storage & Shell",
         "link": "/docs/configuration/storage-shell/"
       },
       {
-        "label": "Agents",
-        "link": "/docs/configuration/agents/"
-      },
-      {
-        "label": "CLI",
-        "link": "/docs/configuration/cli/"
-      },
-      {
-        "label": "MCP Servers",
-        "link": "/docs/configuration/mcp/"
-      },
-      {
-        "label": "Skills",
-        "link": "/docs/configuration/skills/"
-      },
-      {
-        "label": "Memory",
-        "link": "/docs/configuration/memory/"
+        "label": "Encryption at Rest",
+        "link": "/docs/configuration/encryption/"
       },
       {
         "label": "Observability",
         "link": "/docs/configuration/observability/"
       },
       {
+        "label": "Kubernetes",
+        "link": "/docs/server/kubernetes/"
+      }
+    ]
+  },
+  {
+    "label": "Desktop App Edition",
+    "items": [
+      {
+        "label": "Install the Desktop App",
+        "link": "/docs/app/installation/"
+      },
+      {
+        "label": "Quick Start",
+        "link": "/docs/app/quick-start/"
+      },
+      {
+        "label": "Web Access",
+        "link": "/docs/app/web-access/"
+      }
+    ]
+  },
+  {
+    "label": "Using Vizier",
+    "items": [
+      {
+        "label": "Configuration Overview",
+        "link": "/docs/configuration/"
+      },
+      {
+        "label": "Providers",
+        "link": "/docs/configuration/providers/"
+      },
+      {
+        "label": "Agents",
+        "link": "/docs/configuration/agents/"
+      },
+      {
+        "label": "Channels",
+        "link": "/docs/configuration/channels/"
+      },
+      {
+        "label": "Memory",
+        "link": "/docs/configuration/memory/"
+      },
+      {
+        "label": "Skills",
+        "link": "/docs/configuration/skills/"
+      },
+      {
+        "label": "Functions",
+        "link": "/docs/configuration/custom-tools/"
+      },
+      {
+        "label": "MCP Servers",
+        "link": "/docs/configuration/mcp/"
+      },
+      {
+        "label": "Voice, Images & Embeddings",
+        "link": "/docs/configuration/tools-embedding/"
+      },
+      {
+        "label": "Live Voice",
+        "link": "/docs/configuration/live-voice/"
+      },
+      {
         "label": "Agent Secrets",
         "link": "/docs/configuration/secrets/"
+      },
+      {
+        "label": "Artifacts",
+        "link": "/docs/configuration/artifacts/"
+      },
+      {
+        "label": "Office Addon",
+        "link": "/docs/configuration/office-addon/"
+      },
+      {
+        "label": "Consultations",
+        "link": "/docs/configuration/consultations/"
+      },
+      {
+        "label": "Questions and Sensitive Input",
+        "link": "/docs/configuration/questions/"
+      },
+      {
+        "label": "Time",
+        "link": "/docs/configuration/time/"
+      },
+      {
+        "label": "Color Themes",
+        "link": "/docs/configuration/themes/"
       }
     ]
   },
@@ -104,6 +170,40 @@ export const sidebar = [
       {
         "label": "Examples",
         "link": "/docs/api-integration/examples/"
+      },
+      {
+        "label": "Building on vizier-core",
+        "link": "/docs/api-integration/building-on-vizier-core/"
+      }
+    ]
+  },
+  {
+    "label": "Experimental",
+    "items": [
+      {
+        "label": "Projects",
+        "link": "/docs/configuration/projects/"
+      },
+      {
+        "label": "Fleet: Bus Contract",
+        "link": "/docs/fleet/bus-contract/"
+      },
+      {
+        "label": "Fleet: Ownership and Recovery",
+        "link": "/docs/fleet/ownership-and-recovery/"
+      }
+    ]
+  },
+  {
+    "label": "Contributing",
+    "items": [
+      {
+        "label": "Building from Source",
+        "link": "/docs/getting-started/contributing/"
+      },
+      {
+        "label": "Build Flavours",
+        "link": "/docs/configuration/build-flavours/"
       }
     ]
   }

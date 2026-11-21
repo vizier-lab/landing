@@ -19,6 +19,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const docsDest = path.join(root, "src", "content", "docs", "docs");
 const sidebarDest = path.join(root, "src", "generated", "docs-sidebar.mjs");
+const imagesDest = path.join(root, "public", "docs", "images");
 
 const EDIT_BASE = "https://github.com/vizier-lab/vizier/edit/master/docs/src/";
 
@@ -154,6 +155,13 @@ export function rewriteLinks(body, source, exists) {
 
               const [rawPath, ...hashParts] = target.split("#");
               const hash = hashParts.length ? `#${hashParts.join("#")}` : "";
+              if (bang === "!" && /\.(png|jpe?g|gif|webp|svg)$/i.test(rawPath)) {
+                const image = path.posix.normalize(
+                  path.posix.join(path.posix.dirname(source.replace(/\\/g, "/")), rawPath),
+                );
+                if (image.startsWith("images/")) return `${bang}[${label}](/docs/${image}${title})`;
+                return match;
+              }
               if (!/\.md$/i.test(rawPath)) return match;
 
               const resolved = path.posix.normalize(
@@ -297,6 +305,13 @@ export function sync({ source = findVizierSource() } = {}) {
     const withoutTitle = stripLeadingH1(rewritten);
     fs.writeFileSync(destination, `${frontmatter({ title, source: sourcePath })}${withoutTitle}\n`);
     written += 1;
+  }
+
+  // Screenshots live in docs/src/images and are served at /docs/images/.
+  const imagesSource = path.join(docsSource, "images");
+  fs.rmSync(imagesDest, { recursive: true, force: true });
+  if (fs.existsSync(imagesSource)) {
+    fs.cpSync(imagesSource, imagesDest, { recursive: true });
   }
 
   const sidebar = buildSidebar(summary);

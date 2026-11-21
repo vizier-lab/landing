@@ -76,7 +76,7 @@ cargo binstall vizier   # prebuilt
 cargo install vizier    # from source
 ```
 
-The [quick start](/docs/getting-started/quick-start/) goes further, and the
+The [quick start](/docs/server/quick-start/) goes further, and the
 [configuration section](/docs/configuration/) covers providers, channels,
 agents, memory, skills, MCP and observability.
 

@@ -101,3 +101,16 @@ test("buildSidebar places Home, Blog and the intro before the groups", () => {
   assert.equal(sidebar[3].label, "Getting Started");
   assert.equal(sidebar[3].items.length, 2);
 });
+
+test("rewriteLinks points screenshots at /docs/images", () => {
+  const out = rewriteLinks(
+    "![Providers](../images/providers.png) and ![x](./images/home.png)",
+    "getting-started/first-agent.md",
+    new Set(),
+  );
+  assert.match(out, /\]\(\/docs\/images\/providers\.png\)/);
+  assert.match(
+    rewriteLinks("![x](./images/home.png)", "introduction.md", new Set()),
+    /\]\(\/docs\/images\/home\.png\)/,
+  );
+});
