@@ -57,9 +57,7 @@ const designDir = path.join(vizier, "design");
 if (!fs.existsSync(path.join(designDir, "package.json"))) {
   console.error(
     `Found vizier at ${vizier}, but ${designDir} is missing.\n` +
-      "Run `git -C " +
-      vizier +
-      " submodule update --init design` (or `just install`).",
+      "Run `just install` in the vizier checkout (or check out a vizier that has design/).",
   );
   process.exit(1);
 }

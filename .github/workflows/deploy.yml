@@ -4,8 +4,8 @@ on:
   push:
     branches: [master]
   repository_dispatch:
-    # vizier-release: a release (docs and version chip)
-    # design-updated: a push to vizier-lab/design; the catalogue is rebuilt too
+    # vizier-release: a release, or a push to vizier master that touches docs/ or design/
+    # design-updated: kept for old senders; it deploys vizier master like any other dispatch
     types: [vizier-release, design-updated]
   workflow_dispatch:
     inputs:
@@ -44,8 +44,13 @@ jobs:
           path: .vizier-source
           fetch-depth: 1
 
-      - name: Checkout design
-        run: git -C .vizier-source submodule update --init design
+      # design/ is a folder of vizier since 2026-11-25; a ref from before then (an older release
+      # tag) still has it as a submodule.
+      - name: Checkout design (older refs only)
+        run: |
+          if git -C .vizier-source config -f .gitmodules --get submodule.design.path >/dev/null 2>&1; then
+            git -C .vizier-source submodule update --init design
+          fi
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -100,22 +105,11 @@ jobs:
         run: npm run build
 
       # The catalogue is published at /design and is part of this site, so it is
-      # built on every deploy. A design push dispatches this workflow with that
-      # commit in client_payload.sha; any other deploy takes design master, so
-      # the catalogue always shows the current design rather than vizier's pin.
-      - name: Checkout design catalogue
-        uses: actions/checkout@v4
-        with:
-          repository: vizier-lab/design
-          ref: ${{ github.event.client_payload.sha || 'master' }}
-          path: .design-catalogue
-          fetch-depth: 1
-
+      # built on every deploy, from the same vizier checkout as the docs.
       - name: Build the catalogue
         run: |
           set -euo pipefail
-          cd .design-catalogue
-          npm ci --no-audit --no-fund
+          cd .vizier-source/design
           npm run build-storybook
 
       - name: Check internal links
@@ -129,7 +123,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist/design
-          cp -R .design-catalogue/storybook-static/. dist/design/
+          cp -R .vizier-source/design/storybook-static/. dist/design/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

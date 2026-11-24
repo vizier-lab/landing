@@ -5,7 +5,7 @@ documentation.
 
 Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build).
 The landing page and blog use React components and tokens from the
-[`design`](https://github.com/vizier-lab/design) library; the docs are the
+[`design`](https://github.com/vizier-lab/vizier/tree/master/design) library (vizier's `design/`); the docs are the
 contents of `vizier/docs/` rendered by Starlight.
 
 The site is a submodule of [vizier](https://github.com/vizier-lab/vizier). It is
@@ -95,16 +95,16 @@ The landing repository owns the GitHub Pages site.
 - Push to `master` → build and deploy.
 - `repository_dispatch` of type `vizier-release` → build and deploy with the
   version and docs ref in the payload.
-- `repository_dispatch` of type `design-updated` → build and deploy with the
-  catalogue taken from the design commit in `client_payload.sha`.
+- `repository_dispatch` of type `design-updated` → kept for old senders; same
+  as any other deploy.
 - `workflow_dispatch` → manual deploy with optional `version` and `ref`.
-- A `vizier` docs change can dispatch the same event with `ref: master`.
+- A push to `vizier` master that touches `docs/` or `design/` dispatches
+  `vizier-release` with `ref: master`.
 
 Every deploy also builds the design system's Storybook and publishes it at
-`/design`. The catalogue source is `vizier-lab/design` at the dispatched commit,
-or `master` for any other deploy — deliberately the current design, not vizier's
-submodule pin, so a design push publishes without waiting for a pin bump. That
-build happens before the Pages artifact is uploaded, so a Storybook that fails
+`/design`. The catalogue source is vizier's `design/` at the same ref as the
+docs (`design/` became a folder of vizier on 2026-11-25; an older ref still has
+it as a submodule, which the workflow checks out). That build happens before the Pages artifact is uploaded, so a Storybook that fails
 to build fails the deploy instead of shipping a broken catalogue.
 
 `vizier` sends the dispatch from its release workflow. It needs a
